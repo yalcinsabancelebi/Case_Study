@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Case_Study.Models.Plants>
+@{
+    ViewBag.Title = "Index";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5);
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+<center>
+    <h2>Anasayfa</h2>
+    <hr />
+
+    <table>
+        <tr style="font-weight: bold; background-color: lightgray;">
+            <td>Bitki Adı</td>
+            <td>Bitki Açıklaması</td>
+            <td>Bitki Faydaları</td>
+            <td>Bitki Resmi</td>
+        </tr>
+        @foreach (Case_Study.Models.Plants item in @Model)
+        {
+            <tr>
+                <td>@item.BitkiAdi</td>
+                <td>@item.BitkiAciklamasi</td>
+                <td>@item.BitkiFaydasi</td>
+                <td><img src="@Url.Content(item.BitkiResmi)" height="100" width="100" /></td>
+            </tr>
+        }
+
+    </table>
+
+
+</center>
+
+

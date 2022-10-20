@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Case_Study.Models.Bitkiler>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Tüm Bitkiler</h2>
+
+<p>
+    @Html.ActionLink("Yeni Kayıt", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label for="BitkiAdi">Bitki Adı</label>
+        </th>
+        <th>
+            <label for="BitkiAciklama">Açıklama</label>
+        </th>
+        <th>
+            <label for="BitkiFaydasi">Faydası</label>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BitkiAdi)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BitkiAciklamasi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BitkiFaydasi)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Detaylar", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                <input type="button" class="delete-row" value="Sil" data-id="@item.Id" style="color: #fff; background-color: #d9534f; border-color: #d43f3a; width: 78px; height: 32px; border: 0; border-radius: 3px; "/>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).on("click", ".delete-row", function () {
+            var confirmDelete = confirm("Silme işlemini onaylıyor musunuz?");
+            if (confirmDelete) {
+                var id = $(this).attr("data-id");
+                var deleteTr = $(this).closest("tr")
+                $.ajax({
+                    url: '/Bitkilers/Delete/' + id,
+                    type: "POST",
+                    success: function (result) {
+                        if (result == 1) {
+                            deleteTr.fadeOut(400, function () {
+                                deleteTr.remove();
+                            });
+                        }
+                        else {
+                            alert("Hata")
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}
+
+

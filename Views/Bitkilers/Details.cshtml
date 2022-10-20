@@ -1,0 +1,47 @@
+﻿@model Case_Study.Models.Bitkiler
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Bitki Detayları</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BitkiAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BitkiAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BitkiAciklamasi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BitkiAciklamasi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BitkiFaydasi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BitkiFaydasi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BitkiResmi)
+        </dt>
+        <img src="@Model.BitkiResmi" width="200" style="margin-left: 20px" />
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Bitkiler Sayfasına Git", "Index")
+</p>
+
